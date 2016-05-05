@@ -1,0 +1,41 @@
+include permitions
+if value == ''
+  - value = '................'
+
+if field.name == 'ID'
+  =value
+else  
+  a(href='#',onclick="changeToEditable('"+category+"','"+field.name+"'," + row.ID +")")
+    if (row.ID == 80) && (field.name == 'Value')
+      | *******
+    else  
+      case field.name
+        when 'Password'
+          | *******
+        when 'Softphone'
+          if row.Softphone
+            span(class=['glyphicon','glyphicon-ok'], aria-hidden="true")
+          else
+            span(class=['glyphicon','glyphicon-remove'], aria-hidden="true")  
+        when 'Scenario'
+          if value
+            span(class=['glyphicon','glyphicon-ok'], aria-hidden="true")
+          else
+            span(class=['glyphicon','glyphicon-remove'], aria-hidden="true")  
+        when 'Specials'
+          if value > 0
+            span(class=['glyphicon','glyphicon-ok'], aria-hidden="true")
+          else
+            span(class=['glyphicon','glyphicon-remove'], aria-hidden="true")  
+        when 'ID_Phone'
+          each row in value
+            if(row.Selected)
+              =row.Description
+          =pDes     
+        when 'ID_Group'
+          =permitions[value]
+        default    
+          =value
+if field.name == 'Specials'
+  div(id=category+'_'+field.name+'_'+row.ID+'_Form', class='modal fade',  tabindex='-1' role='dialog' 
+     aria-labelledby='myModalLabel' aria-hidden='true')

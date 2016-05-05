@@ -1,0 +1,39 @@
+extends mgmt
+
+block mgmt_content
+  table(class=['table','table-hover'])
+    tr
+      each field in fields
+        if field.name != 'ID'
+          th
+            = field.name
+      th Reboot
+      th Resync
+      th Del
+    - var category = 'Phones'
+    each row in rows
+      tr
+        each field in fields
+          if field.name != 'ID'
+            td(id=category+'_'+field.name+'_'+row.ID)
+              - var value = row[field.name]
+              include default_field          
+        td 
+          a(class="btn btn-default",href='http://'+row.IP+'/admin/reboot',target="_blank") reboot
+        td
+          a(class="btn btn-default",href='http://'+row.IP+'/admin/resync?http://10.3.5.0/config.php?MAC=$MAU',target="_blank") resync
+        td
+          a(class="btn btn-danger",onClick="del('"+category+"',"+row.ID+")") Del
+    tr
+      each field in fields
+        case field.name
+          when 'ID'
+            | 
+          when 'Specials'    
+            | 
+          default
+            td
+              input(class="form-control",id='new_'+field.name,type=text,placeholder=field.name)
+      td
+        button(class="btn btn-primary",onClick="add('Phones');")
+          | Add

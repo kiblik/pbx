@@ -1,0 +1,37 @@
+extends mgmt
+
+block mgmt_content
+  table(class='table table-hover')
+    tr
+      each field in fields
+        if field.name != 'ID'
+          th
+            = field.name
+      th
+        | Call
+      th
+        | Del  
+    - var category = 'Exts'
+    each row in rows
+      tr
+        each field in fields
+          if field.name != 'ID'
+            td(id=category+'_'+field.name+'_'+row.ID)
+              - var value = row[field.name]
+              include default_field          
+        td
+          a(class="btn btn-success" href="#" onClick="call("+row.Ext+")")
+            | Call
+        td
+          a(class="btn btn-danger",ref='#' onClick="del('"+category+"',"+row.ID+")") Del
+    tr
+      each field in fields
+        case field.name
+          when 'ID'
+            | 
+          default
+            td
+              input(class="form-control",id='new_'+field.name,type=text,placeholder=field.name)
+      td
+        button(class="btn btn-primary",onClick="add('Exts');")
+          | Add

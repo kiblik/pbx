@@ -1,0 +1,55 @@
+extends mgmt
+block mgmt_content
+  table(class=['table','table-hover'])
+    tr
+      each field in fields
+        if (field.name != 'ID' && field.name != 'pDes')
+          th
+            = field.name
+      th Del
+    - var category = 'Users'
+    each row in rows
+      tr
+        - var ID_Phone = 0
+        each field in fields
+          case field.name
+            when 'ID'
+              | 
+            when 'pDes'
+              | 
+            default  
+              td(id=category+'_'+field.name+'_'+row.ID)
+                - var value = row[field.name]
+                - var pDes = row.pDes
+                include default_field          
+        td
+          a(class="btn btn-danger",href='#' onClick="del('"+category+"',"+row.ID+")") Del
+    tr
+      each field in fields
+        case field.name
+          when 'ID'
+            | 
+          when 'pDes'    
+            | 
+          when 'ID_Group'
+            td
+              include permitions
+              select(class="form-control" id='new_'+field.name)
+                each permition, index in permitions
+                  - var selected = false
+                  if permition == 'teacher'
+                    - var selected = true
+                  option(value=index,selected=selected)
+                    =permition
+          when 'ID_Phone'
+            td
+              select(class="form-control",id='new_'+field.name)
+                each row in phones
+                  option(value=row.ID)
+                    =row.Description    
+          default
+            td
+              input(class="form-control",id='new_'+field.name,type=text,placeholder=field.name)
+      td
+        button(class="btn btn-primary",onClick="add('Users');")
+          | Add

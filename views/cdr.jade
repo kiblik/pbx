@@ -1,0 +1,25 @@
+extends index
+
+block content
+  | nejake filtrovatko
+  table(class='table table-hover')
+    tr
+      each field in fields
+        if field.name != 'ID'
+          th
+            case field.name
+              when 'date'
+                | Dátum
+              when 'src'
+                | Dokiaľ
+              when 'dst'
+                | Kam
+              when 'disposition'
+                | Stav
+              when 'billsec'
+                | Dĺžka
+    each row in rows
+      tr
+        each field in fields
+          td
+            =row[field.name]

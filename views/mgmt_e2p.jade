@@ -1,0 +1,15 @@
+extends mgmt
+
+block mgmt_content
+  =count
+  svg(xmlns="http://www.w3.org/2000/svg",width='400px',height=count*20+2+'px')
+    each row,index in rows_exts
+      rect(x=10,y=index*20+2,width=40,height=20,style="fill:aqua;stroke:black")
+      text(x=30,y=index*20+18.5,font-size=18,text-anchor="middle") 
+        =row.Ext
+
+    each row,index in rows_phones
+      rect(x=150,y=index*20+2,width=200,height=20,style="fill:aqua;stroke:black")
+      text(x=250,y=index*20+18.5,font-size=18,text-anchor="middle") 
+        =row.Description
+    

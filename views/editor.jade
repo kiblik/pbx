@@ -1,0 +1,27 @@
+include permitions
+case field
+  when 'Scenario'
+    textarea(class="form-control",type="text", id='Value_'+element)
+      =value
+  when 'ID_Phone'
+    select(class="form-control",id='Value_'+element)
+      each row in value
+        - var selected = row.Selected==1
+        option(value=row.ID,selected=selected)
+          =row.Description    
+  when 'ID_Group'
+    select(class="form-control",id='Value_'+element)
+      each permition, index in permitions
+        - var selected = index==value
+        option(value=index,selected=selected)
+          =permition
+  when 'Specials'
+    |         
+  default
+    input(class="form-control",type="text", id='Value_'+element, value=value)
+if(field != 'Specials')
+  br
+  input(class="btn btn-primary",type="button", value="Change", onClick="updateField('"+category+"','"+field+"','"+id+"','Value_"+element+"')")
+  input(class="btn btn-primary",type="button", value="Cancel", onClick="getDefault('"+category+"','"+field+"','"+id+"')")  
+else
+  include specials_editor

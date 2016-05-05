@@ -1,0 +1,46 @@
+extends layout
+
+block header
+  nav(class='navbar navbar-default')
+    div(class='container-fluid')
+      div('navbar-header')
+        button(type='button', class='navbar-toggle collapsed', data-toggle='collapse' data-target='#bs-example-navbar-collapse-1' aria-expanded='false')
+          span(class='sr-only') Toggle navigation
+          span(class='icon-bar')
+          span(class='icon-bar')
+          span(class='icon-bar')
+        a(class='navbar-brand', href='#')
+          | PBX
+      div(class='collapse navbar-collapse', id='bs-example-navbar-collapse-1')
+        ul(class='nav navbar-nav')
+          li
+            a(href='/directory')
+              | Telefónny zoznam
+          if(perm>0)
+            li
+              a(href='/cdr')
+                | Záznam hovorov
+          if(perm>1)
+            li
+              a(href='#') Prepájanie telefonátov            
+          if(perm>2)              
+            li(class='dropdown')
+              a(href='#', class='dropdown-toggle', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                | Správa ústredne
+                span(class='caret')
+              ul(class='dropdown-menu')
+                li
+                  a(href='/mgmt/phones')
+                    | Správa telefónov
+                  a(href='/mgmt/ext')
+                    | Správa klapiek
+                  a(href='/mgmt/defaults')
+                    | Správa predvolených hodnôt
+                  a(href='/mgmt/e2p')
+                    | Správa prepojov
+                  a(href='/mgmt/users')
+                    | Správa užívatelov
+                  a(href='#')
+                    | ...
+                  a(href='/mgmt/updates')
+                    | Aktualizácie
