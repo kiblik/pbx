@@ -66,14 +66,37 @@ function add(category){
       Description = $('#new_Description').val();
       values = {Net_ID: Net_ID, Net_mask: Net_mask, ID_Phone: ID_Phone, ID_Group: ID_Group, Description: Description};  
       break;
-
+    case 'Specials':
+      CiscoKey = $('#new_CiscoKey').val();
+      Value = $('#new_Value').val();
+      ID_Phone = $('#new_Phone_ID').val();
+      values = {CiscoKey: CiscoKey, Value: Value, ID_Phone:ID_Phone};
+      break;
+    case 'Ext2Phones':
+      ID_Ext = $('#new_ID_Ext').val();
+      ID_Phone = $('#new_ID_Phone').val();
+      values = {ID_Ext: ID_Ext, ID_Phone:ID_Phone};      
+      break;
+    case 'aScTea2Ext':
+      ID_Ext = $('#new_ID_Ext').val();
+      ID_aScTea = $('#new_ID_aScTea').val();
+      values = {ID_Ext: ID_Ext, ID_aScTea:ID_aScTea};      
+      break;
+    case 'aScCab2Ext':
+      ID_Ext = $('#new_ID_Ext').val();
+      ID_aScCab = $('#new_ID_aScCab').val();
+      values = {ID_Ext: ID_Ext, ID_aScCab:ID_aScCab};      
+      break;
   }    
+  console.log(values);
   socket.emit('add row', { category: category, values: values});
 }
 
 function del(category,id){
-  console.log('del',category,id);
-  socket.emit('del', { category: category, id: id });
+  if (confirm("Naozaj chceš zmazať položku?") == true) {
+    console.log('del',category,id);
+    socket.emit('del', { category: category, id: id });
+  }
 }
 
 function update(module) {

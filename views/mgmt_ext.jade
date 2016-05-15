@@ -20,10 +20,10 @@ block mgmt_content
               - var value = row[field.name]
               include default_field          
         td
-          a(class="btn btn-success" href="#" onClick="call("+row.Ext+")")
+          a(class="btn btn-success" href="#" onClick="call("+row.Ext+");return false;")
             | Call
         td
-          a(class="btn btn-danger",ref='#' onClick="del('"+category+"',"+row.ID+")") Del
+          a(class="btn btn-danger",ref='#' onClick="del('"+category+"',"+row.ID+");return false;") Del
     tr
       each field in fields
         case field.name
@@ -33,5 +33,5 @@ block mgmt_content
             td
               input(class="form-control",id='new_'+field.name,type=text,placeholder=field.name)
       td
-        button(class="btn btn-primary",onClick="add('Exts');")
+        button(class="btn btn-primary",onClick="add('Exts');return false;")
           | Add

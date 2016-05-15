@@ -2,5 +2,11 @@ extends index
 
 block content
   input(id="dir_search",class="form-control",oninput="search();",placeholder="Filter")
-  table(id="dir_table",class='table table-hover')
-    include dir_table
+  table(class='table table-hover')
+    tr
+      each field in fields
+        if field.name != 'ID'
+          th
+            = field.name
+    tbody(id="dir_table")
+      include dir_table

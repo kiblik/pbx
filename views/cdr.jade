@@ -1,7 +1,6 @@
 extends index
 
 block content
-  | nejake filtrovatko
   table(class='table table-hover')
     tr
       each field in fields
@@ -11,15 +10,50 @@ block content
               when 'date'
                 | Dátum
               when 'src'
-                | Dokiaľ
+                | Odkiaľ
               when 'dst'
                 | Kam
               when 'disposition'
                 | Stav
               when 'billsec'
                 | Dĺžka
-    each row in rows
-      tr
-        each field in fields
-          td
-            =row[field.name]
+    tr
+      each field in fields
+        if field.name != 'ID'
+          th
+            case field.name
+              when 'date'
+                input(type="text" id="dateFrom" size="10" onchange="pager=0;cdr_search();")
+                | -
+                input(type="text" id="dateTo" size="10" onchange="pager=0;cdr_search();")
+              when 'src'
+                input(type="number" id="src" size="10" oninput="pager=0;cdr_search();")
+              when 'dst'
+                input(type="number" id="dst" size="10" oninput="pager=0;cdr_search();")
+              when 'disposition'
+                select(id="disposition" onchange="pager=0;cdr_search();")
+                  option(value="")
+                    | 
+                  option(value="FAILED")
+                    | Chyba
+                  option(value="NO ANSWER")
+                    | Bez odpovede
+                  option(value="BUSY")
+                    | Obsadené
+                  option(value="ANSWERED")
+                    | Uskutočnené
+              when 'billsec'
+                input(type="number" id="billsecFrom" size="10" oninput="pager=0;cdr_search();")
+                | -
+                input(type="number" id="billsecTo" size="10"  oninput="pager=0;cdr_search();")
+    tbody(id='cdr_table')
+      include cdr_table           
+  ul(class="pager")
+    li
+      a(href='#' onclick="updatePager(-1);return false;")
+        | Previous
+      a(href='#' onclick="updatePager(1);return false;")
+        | Next
+
+block additionalScripts
+  script(src='/javascripts/cdr.js')

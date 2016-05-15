@@ -9,17 +9,17 @@ block mgmt_content
             option(value=row.ID)
               =row.Ext + " (" + row.Name + ")"   
       td
-        select(class="form-control",id='new_ID_Phone')
-          each row in rows_phones
+        select(class="form-control",id='new_ID_aScCab')
+          each row in rows_asccab
             option(value=row.ID)
-              =row.Description + " (" + row.Login + ")"
+              =row.name
       td
-        button(class="btn btn-primary",onClick="add('Ext2Phones');return false;")
+        button(class="btn btn-primary",onClick="add('aScCab2Ext');return false;")
           | Add
 
 
   p(id='chart')
-  script(src='/javascripts/e2p.js')
+  script(src='/javascripts/asccab2ext.js')
       
 block additionalScripts
   include sankey

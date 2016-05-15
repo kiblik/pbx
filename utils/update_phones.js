@@ -6,7 +6,7 @@ module.exports = function (callback){
   var fs = require('fs-extra')
 
 
-  var filename = 'extensions.conf';
+  var filename = 'sip.conf';
   
   var options = {
     file: filename,
@@ -18,20 +18,26 @@ module.exports = function (callback){
   
   fs.copySync('headers/'+filename, filename);
 
-  var query = "SELECT E.Ext as Ext, E.Name as Description, group_concat(concat('SIP/',P.Login) separator '&') as Dial, E.Scenario as Scenario FROM Exts as E RIGHT JOIN Ext2Phones as E2P ON E.ID=E2P.ID_Ext JOIN Phones as P ON E2P.ID_Phone=P.ID WHERE E.Scenario is NULL GROUP BY E.ID ORDER BY E.Ext";
+  var query = "select p.description, p.login, p.prototype as phone_prototype, p.password, groups.group_name, groups.group_ext, groups.pickup from Phones as p join Ext2Phones as e2p on p.id = e2p.id_phone join Exts as e on e.id = e2p.id_ext join (select e.id as id, group_concat(distinct concat('SIP/',p.Login) separator '&') as pickup, e.name as group_name, e.ext as group_ext from Exts as e join Ext2Phones as e2p on e.id = e2p.id_ext join Phones as p on p.id = e2p.id_phone group by e.id order by group_ext) as groups on groups.id = e.id group by p.login";
 
   var query = connection.query(query, function(err, result) {
     if (!err){ 
       var wstream = fs.createWriteStream(filename,{'flags': 'a'});
       result.forEach(function(row){
-
-        ext = row.Ext
-        description = row.Description;
-        dial = row.Dial;
+        description = row.description;
+        login = row.login;
+        phone_prototype = row.phone_prototype;
+        password = row.password;
+        group_name = row.group_name;
+        group_ext = row.group_ext;
+        pickup = row.pickup;
         wstream.write('; '+description+' \n');
-        wstream.write('exten => '+ext+',1,Dial('+dial+')\n');
-        wstream.write('   same => n,Handup()\n\n');
-
+        wstream.write('['+login+']('+phone_prototype+')\n');
+        wstream.write('secret='+password+' \n');
+        wstream.write('callerid='+description+' \n');
+        wstream.write('setvar=PICKUP='+pickup+' \n');
+        wstream.write('setvar=GROUPNUM='+group_ext+' \n');
+        wstream.write('setvar=GROUPNAME='+group_name+' \n');
       });
       wstream.end();
       scp.send(options, function (err) {

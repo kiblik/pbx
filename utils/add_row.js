@@ -3,7 +3,7 @@ module.exports = function (category,values,callback){
   var connection = require('./mysql_connection')();
   var ip = require('ip');
   
-  if( ['Phones','Exts','Defaults','Users'].indexOf(category) == -1 )
+  if( ['Phones','Exts','Defaults','Users','Specials','Ext2Phones','aScTea2Ext','aScCab2Ext'].indexOf(category) == -1 )
     return false;  
 
   for(var field in values)
@@ -11,7 +11,6 @@ module.exports = function (category,values,callback){
       values[field] = ip.toLong(values[field]); // inde na toto pouzivam MySQL f-ciu, ale nemal by som ju tam teraz ako nacpat.
   
   var query = 'INSERT INTO ?? SET ? ';
-
   var query = connection.query(query,[category, values], function(err, result) {
     if (!err){ 
       callback();

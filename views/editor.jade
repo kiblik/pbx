@@ -21,7 +21,7 @@ case field
     input(class="form-control",type="text", id='Value_'+element, value=value)
 if(field != 'Specials')
   br
-  input(class="btn btn-primary",type="button", value="Change", onClick="updateField('"+category+"','"+field+"','"+id+"','Value_"+element+"')")
-  input(class="btn btn-primary",type="button", value="Cancel", onClick="getDefault('"+category+"','"+field+"','"+id+"')")  
+  input(class="btn btn-primary",type="button", value="Change", onClick="updateField('"+category+"','"+field+"','"+id+"','Value_"+element+"');return false;")
+  input(class="btn btn-primary",type="button", value="Cancel", onClick="getDefault('"+category+"','"+field+"','"+id+"');return false;")  
 else
   include specials_editor

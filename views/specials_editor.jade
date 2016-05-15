@@ -8,13 +8,29 @@ div(class="modal-dialog")
     div(class="modal-body")
       form(class="form-horizontal" role="form")
         div( class="form-group")
-          each row in value
-            each field in row
-              =field
-              br
+          table(class='table')
+            each row in value
+              tr
+                td
+                  =row.CiscoKey
+                td
+                  =row.Value
+                td 
+                  a(class="btn btn-danger",onClick="del('Specials',"+row.ID+");return false;")
+                    | Del
+            tr
+              td
+                input(class="form-control",type="text", id='new_CiscoKey', placeholder='CiscoKey')
+              td
+                input(class="form-control",type="text", id='new_Value', placeholder='Value')
+              td
+                input(type="hidden", id='new_Phone_ID', value=id)
+                button(class="btn btn-primary",onClick="add('Specials');return false;")
+                  | Add
+                
+                
     div(class="modal-footer")
       button(type="button" class="btn btn-default" data-dismiss="modal") Close
-      button(type="button" class="btn btn-primary") Save changes
 - var show = "$('#"+element+"').modal('show');"
 script
   =show

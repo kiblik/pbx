@@ -9,7 +9,7 @@ block header
           span(class='icon-bar')
           span(class='icon-bar')
           span(class='icon-bar')
-        a(class='navbar-brand', href='#')
+        a(class='navbar-brand', href='/')
           | PBX
       div(class='collapse navbar-collapse', id='bs-example-navbar-collapse-1')
         ul(class='nav navbar-nav')
@@ -20,9 +20,10 @@ block header
             li
               a(href='/cdr')
                 | Záznam hovorov
-          if(perm>1)
-            li
-              a(href='#') Prepájanie telefonátov            
+          //
+            if(perm>1)
+              li
+                a(href='#') Prepájanie telefonátov            
           if(perm>2)              
             li(class='dropdown')
               a(href='#', class='dropdown-toggle', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
@@ -40,7 +41,9 @@ block header
                     | Správa prepojov
                   a(href='/mgmt/users')
                     | Správa užívatelov
-                  a(href='#')
-                    | ...
+                  a(href='/mgmt/asctea2ext')
+                    | Správa aScTea -> ext
+                  a(href='/mgmt/asccab2ext')
+                    | Správa aScCab -> ext
                   a(href='/mgmt/updates')
                     | Aktualizácie

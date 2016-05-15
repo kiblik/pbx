@@ -1,0 +1,17 @@
+each row in rows
+  tr
+    each field in fields
+      td
+        if field.name != 'disposition'
+          =row[field.name]
+        else
+          case row[field.name]
+            when 'FAILED'
+              | Chyba
+            when 'NO ANSWER'
+              | Bez odpovede
+            when 'BUSY'
+              | Obsadené
+            when 'ANSWERED'
+              | Uskutočnené
+              

@@ -1,18 +1,14 @@
-tr
-  each field in fields
-    if field.name != 'ID'
-      th
-        = field.name
 each row in rows
   tr
     each field in fields
-      td
-        if(field.name == 'Klapka')
-          if(perm == 0)
-            a(class="btn btn-default" href="tel:+421221028"+row[field.name])
-              =row[field.name]
-          else    
-            a(class="btn btn-default" href="#" onClick="call("+row[field.name]+")")
-              =row[field.name]
-        else      
-          =row[field.name]
+      if((row['Klapka'] >= 300 && row['Klapka'] < 400) || perm != 0)
+        td
+          if(field.name == 'Klapka')
+            if(perm == 0)
+              a(class="btn btn-default" href="tel:+421221028"+row[field.name])
+                =row[field.name]
+            else    
+              a(class="btn btn-default" href="#" onClick="call("+row[field.name]+")")
+                =row[field.name]
+          else      
+            =row[field.name]

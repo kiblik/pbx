@@ -5,6 +5,7 @@ var ar = require('./utils/add_row');
 var dr = require('./utils/del_row');
 var call = require('./utils/call');
 var search = require('./utils/dir_table');
+var cdr_search = require('./utils/cdr_table');
 var pc = require('./utils/permitions_checker');
 
 module.exports = function(server){
@@ -24,7 +25,6 @@ module.exports = function(server){
         if(field=='Specials')
           element += '_Form'
         ff(category, field, id, function(value){
-          console.log(value);
           new_content = jade.renderFile('views/editor.jade',{element: element, category: category, field: field, id: id, value: value});
           socket.emit('update element',{element: element, new_content: new_content});
         });      
@@ -135,6 +135,21 @@ module.exports = function(server){
               }  
             });
             break;
+          case 'sip':
+            require('./utils/update_phones')(function(err){
+              if(!err){
+                var msg = 'Phones Updated';
+                msgbanner = jade.renderFile('views/msgbanner.jade',{msgtext: msg});
+                socket.emit('new message',{msg: msg, msgbanner: msgbanner});
+              }
+              else{
+                var err = 'Exts Error';
+                errbanner = jade.renderFile('views/errbanner.jade',{errtext: err});
+                socket.emit('new error',{err: err, errbanner: errbanner});
+                console.log(err);
+              }  
+            });
+            break;
           default:
             var err = 'Error';
             errbanner = jade.renderFile('views/errbanner.jade',{errtext: err});
@@ -167,10 +182,25 @@ module.exports = function(server){
       console.log('search',data);
       str = data.str
       element = 'dir_table';
-      search(str, function(value){
-        new_content = jade.renderFile('views/dir_table.jade',{ fields: value.fields, rows: value.rows });
-        socket.emit('update element',{element: element, new_content: new_content});
-      });
+      IP = socket.handshake.headers['x-forwarded-for'];
+      pc(IP,function(perm){         
+        search(str, function(value){
+          new_content = jade.renderFile('views/dir_table.jade',{ fields: value.fields, rows: value.rows, perm: perm });
+          socket.emit('update element',{element: element, new_content: new_content});
+        });
+      });  
+    });
+    socket.on('cdr_search',function (data){
+      console.log('cdr_search',data);
+      IP = socket.handshake.headers['x-forwarded-for'];
+      pc(IP,function(perm){      
+        if(perm < 1) return
+        element = 'cdr_table';
+        cdr_search(perm, data, IP, function(value){
+          new_content = jade.renderFile('views/cdr_table.jade',{ fields: value.fields, rows: value.rows });
+          socket.emit('update element',{element: element, new_content: new_content});
+        });
+      });  
     });
   });
 

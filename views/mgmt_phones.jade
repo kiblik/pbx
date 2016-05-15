@@ -23,7 +23,7 @@ block mgmt_content
         td
           a(class="btn btn-default",href='http://'+row.IP+'/admin/resync?http://10.3.5.0/config.php?MAC=$MAU',target="_blank") resync
         td
-          a(class="btn btn-danger",onClick="del('"+category+"',"+row.ID+")") Del
+          a(class="btn btn-danger",onClick="del('"+category+"',"+row.ID+");return false;") Del
     tr
       each field in fields
         case field.name
@@ -35,5 +35,5 @@ block mgmt_content
             td
               input(class="form-control",id='new_'+field.name,type=text,placeholder=field.name)
       td
-        button(class="btn btn-primary",onClick="add('Phones');")
+        button(class="btn btn-primary",onClick="add('Phones');return false;")
           | Add

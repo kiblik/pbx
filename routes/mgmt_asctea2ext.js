@@ -16,9 +16,9 @@ router.get('/', function(req, res, next) {
 
     connection.query('SELECT ID, Ext, Name, Scenario FROM `Exts` ORDER BY Ext', function(err, rows_exts, fields_exts) {
       if (!err){      
-        connection.query('SELECT ID, Description, Login, Prototype FROM `Phones` ORDER BY Login', function(err, rows_phones, fields_phones) {
+        connection.query('SELECT ID, concat(firstname," ",lastname) as name FROM `identitySync`.`teachersX` ORDER BY lastname', function(err, rows_asctea, fields_asctea) {
           if (!err){      
-            res.render('mgmt_e2p', { title: 'Managment - exts to phones', rows_phones: rows_phones, rows_exts: rows_exts, perm: perm});  
+            res.render('mgmt_asctea2ext', { title: 'Managment - exts to aScTea', rows_asctea: rows_asctea, rows_exts: rows_exts, perm: perm});  
             connection.end(); 
           }else{
             console.log('Error while performing Query 2');

@@ -5,7 +5,7 @@ if value == ''
 if field.name == 'ID'
   =value
 else  
-  a(href='#',onclick="changeToEditable('"+category+"','"+field.name+"'," + row.ID +")")
+  a(href='#',onclick="changeToEditable('"+category+"','"+field.name+"'," + row.ID +");return false;")
     if (row.ID == 80) && (field.name == 'Value')
       | *******
     else  
@@ -37,5 +37,4 @@ else
         default    
           =value
 if field.name == 'Specials'
-  div(id=category+'_'+field.name+'_'+row.ID+'_Form', class='modal fade',  tabindex='-1' role='dialog' 
-     aria-labelledby='myModalLabel' aria-hidden='true')
+  div(id=category+'_'+field.name+'_'+row.ID+'_Form', class='modal fade',  tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true')

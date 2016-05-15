@@ -1,8 +1,8 @@
 extends mgmt
 block mgmt_content
-  button(class="btn btn-primary",onClick="update('dhcp');")
+  button(class="btn btn-primary",onClick="update('dhcp');return false;")
     | DHCP
-  button(class="btn btn-primary",onClick="update('exts');")
+  button(class="btn btn-primary",onClick="update('exts');return false;")
     | Exts
-  button(class="btn btn-primary",onClick="update('sip');")
+  button(class="btn btn-primary",onClick="update('sip');return false;")
     | SIP/Phones

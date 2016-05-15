@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
     }
     var connection = require('./../utils/mysql_connection')();
 
-    connection.query('SELECT date_format(calldate,"%e.%c.%Y %T") as date, src, dst, disposition,billsec  FROM `cdr` ORDER BY  `calldate` DESC  LIMIT 100', function(err, rows, fields) {
+    connection.query('SELECT date_format(calldate,"%e.%c.%Y %T") as date, src, dst, disposition,billsec  FROM `cdr` ORDER BY  `calldate` DESC  LIMIT 20', function(err, rows, fields) {
       if (!err){      
         res.render('cdr', { title: 'CDR', rows: rows, fields: fields, perm: perm});  
       }else{
