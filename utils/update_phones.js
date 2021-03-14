@@ -34,7 +34,7 @@ module.exports = function (callback){
         wstream.write('; '+description+' \n');
         wstream.write('['+login+']('+phone_prototype+')\n');
         wstream.write('secret='+password+' \n');
-        wstream.write('callerid='+description+' \n');
+        wstream.write('callerid="'+description+'" <'+group_ext+'> \n');
         wstream.write('setvar=PICKUP='+pickup+' \n');
         wstream.write('setvar=GROUPNUM='+group_ext+' \n');
         wstream.write('setvar=GROUPNAME='+group_name+' \n');
