@@ -61,10 +61,12 @@ function add(category){
     case 'Users':
       Net_ID = $('#new_Net_ID').val();
       Net_mask = $('#new_Net_mask').val();
+      Net_ID_v6 = $('#new_Net_ID').val();
+      Net_mask_v6 = $('#new_Net_mask_v6').val();
       ID_Group = $('#new_ID_Group').val();
       ID_Phone = $('#new_ID_Phone').val();
       Description = $('#new_Description').val();
-      values = {Net_ID: Net_ID, Net_mask: Net_mask, ID_Phone: ID_Phone, ID_Group: ID_Group, Description: Description};  
+      values = {Net_ID: Net_ID, Net_mask: Net_mask, Net_ID_v6, Net_mask_v6, ID_Phone: ID_Phone, ID_Group: ID_Group, Description: Description};  
       break;
     case 'Specials':
       CiscoKey = $('#new_CiscoKey').val();

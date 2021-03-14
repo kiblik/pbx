@@ -25,6 +25,8 @@ module.exports = function (category,field,id,callback){
         case 'Specials':
           callback(rows);
           break;
+        case 'Net_ID_v6':
+          rows[0]['field'] = rows[0]['field'].match(/.{1,4}/g).join(':');
         default:
           callback(rows[0].field);       
       }    
