@@ -47,19 +47,19 @@ router.get('/', function(req, res, next) {
                 res.send(JSON.stringify(data));
                 connection.end(); 
               }else{
-                console.log('Error while performing Query 3');
+                console.log('Error while performing Query 3:',err);
                 next(err, req, res);
                 connection.end();
               }
             });
           }else{
-            console.log('Error while performing Query 2');
+            console.log('Error while performing Query 2:',err);
             next(err, req, res);
             connection.end();
           }
         });
       }else{
-        console.log('Error while performing Query 1');
+        console.log('Error while performing Query 1:',err);
         next(err, req, res);
         connection.end();
       }
