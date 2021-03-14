@@ -7,7 +7,7 @@ var pc = require('./../utils/permitions_checker');
 router.get('/', function(req, res, next) {
   ip = req.headers['x-forwarded-for'];
   pc(ip,function(perm){
-    if(perm < 1 ){
+    if(perm < 3 ){
       next("Sorry", req, res);
       return;
     }

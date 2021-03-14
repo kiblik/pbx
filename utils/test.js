@@ -1,1 +1,0 @@
-require('./update_exts')()

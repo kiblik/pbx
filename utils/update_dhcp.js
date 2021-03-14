@@ -7,7 +7,7 @@ module.exports = function (callback){
   var fs = require('fs');
   var exec = require('ssh-exec')
 
-  var filename = '30_telefony_fromIdefixTEST.conf';
+  var filename = '30_telefony_fromIdefix.conf';
   
   var options = {
     file: filename,

@@ -13,7 +13,7 @@ module.exports = function (callback){
     user: 'root',
     host: 'idefix.gjh.sk',
     port: '22',
-    path: '/etc/asterisk/test'
+    path: '/etc/asterisk/sip.conf'
   };
   
   fs.copySync('headers/'+filename, filename);
