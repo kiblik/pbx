@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 
     connection.query('SELECT distinct e.ID, Ext, Name, Scenario FROM `Exts` as e JOIN aScCab2Ext as a2e ON e.ID = a2e.ID_Ext ORDER BY Ext', function(err, rows_exts, fields_exts) {
       if (!err){      
-        connection.query('SELECT distinct t.ID, name FROM `identitySync`.`classroomsX` as t join pbx.aScCab2Ext as a2e on a2e.ID_aScCab=t.id ORDER BY name', function(err, rows_asccab, fields_asccab) {
+        connection.query('SELECT distinct t.ID, name FROM `identitySync`.`classrooms` as t join pbx.aScCab2Ext as a2e on a2e.ID_aScCab=t.id ORDER BY name', function(err, rows_asccab, fields_asccab) {
           if (!err){      
             connection.query('SELECT ID, ID_Ext, ID_aScCab FROM aScCab2Ext', function(err, rows_a2e, fields_a2e) {
               if (!err){  

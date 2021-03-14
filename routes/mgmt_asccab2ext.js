@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 
     connection.query('SELECT ID, Ext, Name, Scenario FROM `Exts` ORDER BY Ext', function(err, rows_exts, fields_exts) {
       if (!err){      
-        connection.query('SELECT ID, name FROM `identitySync`.`classroomsX` ORDER BY name', function(err, rows_asccab, fields_asccab) {
+        connection.query('SELECT ID, name FROM `identitySync`.`classrooms` ORDER BY name', function(err, rows_asccab, fields_asccab) {
           if (!err){      
             res.render('mgmt_asccab2ext', { title: 'Managment - exts to aScCab', rows_asccab: rows_asccab, rows_exts: rows_exts, perm: perm});  
             connection.end(); 

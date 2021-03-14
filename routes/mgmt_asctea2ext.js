@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 
     connection.query('SELECT ID, Ext, Name, Scenario FROM `Exts` ORDER BY Ext', function(err, rows_exts, fields_exts) {
       if (!err){      
-        connection.query('SELECT ID, concat(firstname," ",lastname) as name FROM `identitySync`.`teachersX` ORDER BY lastname', function(err, rows_asctea, fields_asctea) {
+        connection.query('SELECT ID, concat(firstname," ",lastname) as name FROM `identitySync`.`teachers` ORDER BY lastname', function(err, rows_asctea, fields_asctea) {
           if (!err){      
             res.render('mgmt_asctea2ext', { title: 'Managment - exts to aScTea', rows_asctea: rows_asctea, rows_exts: rows_exts, perm: perm});  
             connection.end(); 

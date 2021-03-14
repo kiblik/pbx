@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 
     connection.query('SELECT distinct e.ID, Ext, Name, Scenario FROM `Exts` as e JOIN aScTea2Ext as a2e ON e.ID = a2e.ID_Ext ORDER BY Ext', function(err, rows_exts, fields_exts) {
       if (!err){      
-        connection.query('SELECT distinct t.ID, concat(firstname," ",lastname) as name FROM `identitySync`.`teachersX` as t join pbx.aScTea2Ext as a2e on a2e.ID_aScTea=t.id ORDER BY lastname', function(err, rows_asctea, fields_asctea) {
+        connection.query('SELECT distinct t.ID, concat(firstname," ",lastname) as name, lastname FROM `identitySync`.`teachers` as t join pbx.aScTea2Ext as a2e on a2e.ID_aScTea=t.id ORDER BY lastname', function(err, rows_asctea, fields_asctea) {
           if (!err){      
             connection.query('SELECT ID, ID_Ext, ID_aScTea FROM aScTea2Ext', function(err, rows_a2e, fields_a2e) {
               if (!err){  
