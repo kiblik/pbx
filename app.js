@@ -37,7 +37,8 @@ app.use(logger('dev'));
 //app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 //app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'www'))); // toto by nemalo byt postrebne, ale ak by nahodou zlyhal apache, tak nech to aspon ide
+app.use('/javascripts',express.static(path.join(__dirname, 'www', 'javascripts'))); // toto by nemalo byt postrebne, ale ak by nahodou zlyhal apache, tak nech to aspon ide, ale je lebo nginx robi len proxy
+app.use('/stylesheets',express.static(path.join(__dirname, 'www', 'stylesheets'))); // toto by nemalo byt postrebne, ale ak by nahodou zlyhal apache, tak nech to aspon ide, ale je lebo nginx robi len proxy
 app.use(compression());
 
 app.use('/', routes);

@@ -1,7 +1,8 @@
 extends index
 
 block content
-  input(id="dir_search",class="form-control",oninput="search();",placeholder="Filter")
+  div(class="form-group")
+    input(id="dir_search",class="form-control",oninput="search();",placeholder="Hľadaj")
   table(class='table table-hover')
     tr
       each field in fields
