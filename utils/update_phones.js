@@ -18,7 +18,7 @@ module.exports = function (callback){
   
   fs.copySync('headers/'+filename, filename);
 
-  var query = "select p.description, p.login, p.prototype as phone_prototype, p.password, groups.group_name, groups.group_ext, groups.pickup from Phones as p join Ext2Phones as e2p on p.id = e2p.id_phone join Exts as e on e.id = e2p.id_ext join (select e.id as id, group_concat(distinct concat('SIP/',p.Login) separator '&') as pickup, e.name as group_name, e.ext as group_ext from Exts as e join Ext2Phones as e2p on e.id = e2p.id_ext join Phones as p on p.id = e2p.id_phone group by e.id order by group_ext) as groups on groups.id = e.id group by p.login";
+  var query = "select p.description, p.login, p.prototype as phone_prototype, p.password, grps.group_name, grps.group_ext, grps.pickup from Phones as p join Ext2Phones as e2p on p.id = e2p.id_phone join Exts as e on e.id = e2p.id_ext join (select e.id as id, group_concat(distinct concat('SIP/',p.Login) separator '&') as pickup, e.name as group_name, e.ext as group_ext from Exts as e join Ext2Phones as e2p on e.id = e2p.id_ext join Phones as p on p.id = e2p.id_phone group by e.id order by group_ext) as grps on grps.id = e.id group by p.description, p.login, p.prototype, p.password, grps.group_name, grps.group_ext, grps.pickup";
 
   var query = connection.query(query, function(err, result) {
     if (!err){ 
